@@ -18,6 +18,9 @@ resource "azurerm_resource_group" "example" {
   provider = azurerm.dev
   name     = var.rgname
   location = var.rglocation
+  tags = {
+    environment = "Production"
+  }
 }
 
 resource "azurerm_virtual_network" "example" {
@@ -26,6 +29,9 @@ resource "azurerm_virtual_network" "example" {
   address_space       = ["10.0.0.0/16"]
   resource_group_name = azurerm_resource_group.example.name #cross referencing argument/attribute
   location            = azurerm_resource_group.example.location
+  tags = {
+    environment = "Production"
+  }
 }
 resource "azurerm_subnet" "example" {
   provider             = azurerm.dev
@@ -77,6 +83,9 @@ resource "azurerm_windows_virtual_machine" "example" {
     offer     = "WindowsServer"
     sku       = "2019-Datacenter"
     version   = "latest"
+  }
+  tags = {
+    environment = "Production"
   }
 }
 
